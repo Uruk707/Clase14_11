@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant Usuario
+    participant MaterialBiblioteca as MaterialBiblioteca (Libro, Revista, DVD)
+
+    Usuario ->> MaterialBiblioteca: prestar()
+    MaterialBiblioteca ->> MaterialBiblioteca: verificar prestado == False
+    alt No prestado
+        MaterialBiblioteca ->> MaterialBiblioteca: calcular_fecha_devolucion()
+        MaterialBiblioteca ->> MaterialBiblioteca: asignar fecha_devolucion
+        MaterialBiblioteca ->> MaterialBiblioteca: establecer prestado = True
+        MaterialBiblioteca -->> Usuario: True (préstamo exitoso)
+    else Ya prestado
+        MaterialBiblioteca -->> Usuario: False (préstamo no exitoso)
+    end
+
+
